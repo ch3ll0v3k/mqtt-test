@@ -3,6 +3,7 @@ const config = require('./config');
 
 const DB = require('./DB');
 const mqtt = require('./mqtt');
+const routes = require('./routes');
 
 module.exports = App = class App{
 
@@ -15,15 +16,16 @@ module.exports = App = class App{
 
     this.DB = null;
     this.mqtt = null;
-
+    this.app = null;
     this._init();
-
   }
 
   async _init(){
 
+    this.app = express();
     this.DB = await DB( this, {} );
     this.mqtt = await mqtt( this, {} );
+    await routes( this, {} );
 
   }
 

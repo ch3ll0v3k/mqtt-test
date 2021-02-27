@@ -13,8 +13,9 @@ module.exports = async ( App, params={} )=>{
       ...params,
     });
 
+    const DB = await App.DB.connect();
     console.log(` MongoClient: inited`);
-    return mongoDB;
+    return DB;
 
   }catch(e){
     console.error(` MongoClient: ${e.message}`);
